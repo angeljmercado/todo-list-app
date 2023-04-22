@@ -8,15 +8,19 @@ def add_todo():
     todos.append(todolocal)
     functions.write_todos(todos)
 
-st.title("My Todo App")
+st.title("My Todo-List")
 
-st.subheader("This is my todo app.")
+st.subheader("To complete/delete a todo, just select it.")
 
-st.write("This app is to increase your productivity")
-for todo in todos:
-    st.checkbox(todo)
+
+for index, todo in enumerate(todos):
+    checkbox = st.checkbox(todo, key=todo)
+    if checkbox:
+        todos.pop(index)
+        functions.write_todos(todos)
+        del st.session_state[todo]
+        st.experimental_rerun()
+
 
 user_input = st.text_input(label="", placeholder="Enter a todo...",
 on_change=add_todo, key="newtodo")
-
-st.session_state
