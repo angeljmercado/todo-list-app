@@ -1,5 +1,5 @@
 def get_todos(filepath="todos.txt"):
-    """Read the todos"""
+    """Read the todos."""
     with open(filepath, "r", encoding="utf-8") as file_read:
         list_of_todos = file_read.readlines()
     return list_of_todos
