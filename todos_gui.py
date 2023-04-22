@@ -10,6 +10,7 @@ if not os.path.exists("todos.txt"):
 
 gui.theme("Black")
 
+
 clock = gui.Text("", key="clock")
 label = gui.Text("Type in a To-do")
 input_box = gui.InputText(tooltip="Enter todo", key="todo")
