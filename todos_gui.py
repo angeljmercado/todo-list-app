@@ -1,7 +1,7 @@
-import todos_functions as functions
-import PySimpleGUI as gui
-import time
 import os
+import time
+import PySimpleGUI as gui
+import todos_functions as functions
 
 
 if not os.path.exists("todos.txt"):
@@ -38,6 +38,7 @@ while True:
             todos.append(new_todo)
             functions.write_todos(todos)
             window["todos"].update(values=todos)
+            window["todo"].update(value="")
         case "Edit":
             try:
                 todo_to_edit = values["todos"][0]
@@ -56,7 +57,7 @@ while True:
                 todos.remove(todo_to_complete)
                 functions.write_todos(todos)
                 window["todos"].update(values=todos)
-                window["todo"].update(values='')
+                window["todo"].update(value="")
             except IndexError:
                 gui.popup("Please select an item first.", font=("Helvetica", 20))
         case "todos":
