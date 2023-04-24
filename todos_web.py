@@ -1,12 +1,24 @@
+import os
 import streamlit as st
-import todo_functions as functions
+import todos_functions as functions
+
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", "w") as file:
+        pass
 
 
 todos = functions.get_todos()
+
+
 def add_todo():
+    """Adding todo to the list, and checking to 
+    see if the input already exist in the list"""
     todolocal = st.session_state["newtodo"] + "\n"
-    todos.append(todolocal)
-    functions.write_todos(todos)
+    if todolocal not in todos:
+        todos.append(todolocal)
+        functions.write_todos(todos)
+        st.session_state["newtodo"] = ""
+
 
 st.title("My Todo-List")
 
@@ -22,5 +34,5 @@ for index, todo in enumerate(todos):
         st.experimental_rerun()
 
 
-user_input = st.text_input(label="", placeholder="Enter a todo...",
+user_input = st.text_input(label="Enter a todo...",
 on_change=add_todo, key="newtodo")
